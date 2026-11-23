@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ЛексПротекта</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef3fb;--card:#fff;--tx:#0e1b33;--mut:#5d6b85;--bd:#dfe7f3;--ac:#1556c0;--acs:#e3eefc;--side:#0a2147;
+--hi:#fde4e4;--hit:#c62828;--mid:#fff1cf;--midt:#a86a00;--lo:#dff5e3;--lot:#237a3b;--blue:#e6f0ff}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1526;--card:#16213a;--tx:#e8eefb;--mut:#9aa8c4;--bd:#273553;--acs:#1d2f55;--hi:#4a2327;--hit:#ff8a8a;--mid:#4a3a17;--midt:#ffc864;--lo:#17392a;--lot:#78d98f;--blue:#1d2f55}}
+*,*:before,*:after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
+.app{display:flex;min-height:100vh}
+aside{width:230px;flex:none;background:var(--side);color:#fff;padding:18px 14px;display:flex;flex-direction:column;gap:4px}
+.logo{text-align:center;font-weight:800;font-size:22px;margin-bottom:14px}
+.logo svg{width:70px;height:70px;display:block;margin:0 auto 4px}
+aside a{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;color:#d6e2f7;text-decoration:none;cursor:pointer;font-size:15px}
+aside a:hover{background:rgba(255,255,255,.08)}
+aside a.on{background:#3b82d9;color:#fff}
+aside hr{border:0;border-top:1px solid rgba(255,255,255,.15);width:100%;margin:10px 0}
+main{flex:1;min-width:0;padding:0 24px 30px}
+.top{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:10px}
+.top b{font-size:18px}
+.ws{border:1px solid var(--bd);background:var(--card);padding:6px 14px;border-radius:10px;font-size:13px}
+.hero{display:flex;gap:20px;align-items:stretch;flex-wrap:wrap;margin-bottom:18px}
+.hero .l{flex:1;min-width:280px;background:linear-gradient(135deg,var(--card),var(--blue));border-radius:18px;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.hero h1{margin:0 0 8px;font-size:34px;line-height:1.1}
+.hero p{margin:0 0 16px;color:var(--mut);max-width:380px}
+.hero svg.owl{width:150px;height:150px;flex:none}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;box-shadow:0 4px 18px rgba(20,60,140,.06)}
+.cur{width:300px;flex:none}
+.cur h3{margin:4px 0 8px;font-size:18px}
+.stats{display:flex;justify-content:space-between;border-top:1px solid var(--bd);margin-top:12px;padding-top:12px}
+.stats b{font-size:26px;display:block}.stats span{font-size:12px;color:var(--mut)}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:12px 20px;font-size:15px;font-weight:600;cursor:pointer}
+.btn:hover{filter:brightness(1.1)}.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.sec{background:var(--acs);color:var(--ac)}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600}
+.ok{background:var(--lo);color:var(--lot)}.pr{background:var(--blue);color:var(--ac)}.dr{background:var(--bd);color:var(--mut)}
+.hiB{background:var(--hi);color:var(--hit)}.miB{background:var(--mid);color:var(--midt)}.loB{background:var(--lo);color:var(--lot)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+.step{background:var(--acs);border-radius:12px;padding:14px}.step b{display:block;margin-bottom:4px}.step span{font-size:13px;color:var(--mut)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:18px}
+.row{display:flex;align-items:center;gap:10px;padding:11px 0;border-top:1px solid var(--bd);font-size:14px}
+.row:first-of-type{border-top:0}.row .n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.row small{color:var(--mut)}
+.qa{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qa div{border:1px solid var(--bd);border-radius:12px;padding:12px;cursor:pointer;font-size:14px}.qa div:hover{background:var(--acs)}.qa small{display:block;color:var(--mut)}
+h2{margin:0 0 6px;font-size:30px}.sub{color:var(--mut);margin:0 0 18px}
+.drop{border:2px dashed #6aa0e8;border-radius:16px;text-align:center;padding:34px 16px;background:var(--card);transition:.15s}
+.drop.over{background:var(--acs);border-color:var(--ac)}
+.drop h3{margin:8px 0 2px;font-size:20px}.drop p{margin:2px 0 14px;color:var(--mut)}.drop small{display:block;margin-top:10px;color:var(--mut);font-size:12px}
+.ext{display:inline-block;width:34px;text-align:center;font-size:10px;font-weight:700;color:#fff;border-radius:4px;padding:3px 0;background:#e44}
+.ext.docx,.ext.doc{background:#2b6fd6}.ext.xlsx,.ext.xls{background:#2e9b55}.ext.pptx{background:#e07a1f}.ext.png,.ext.jpg,.ext.zip{background:#7a58c9}
+.x{background:none;border:0;color:var(--mut);cursor:pointer;font-size:18px}
+.cats{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.cats label{border:1px solid var(--bd);border-radius:10px;padding:9px 14px;cursor:pointer;display:flex;gap:8px;align-items:center;font-size:14px;font-weight:600}
+.gridU{display:grid;grid-template-columns:2fr 1fr;gap:18px}
+@media(max-width:900px){.gridU{grid-template-columns:1fr}.cur{width:100%}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.chip{border:1px solid var(--bd);background:var(--card);border-radius:10px;padding:8px 14px;font-size:14px;cursor:pointer;color:var(--tx)}
+.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:16px}
+.sum b{font-size:30px;display:block}.sum span{font-size:13px;color:var(--mut)}
+.tbar{display:flex;gap:10px;flex-wrap:wrap}
+input.s{flex:1;min-width:200px;padding:12px 14px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font-size:15px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:760px}
+th{text-align:left;font-size:13px;color:var(--mut);padding:10px;background:var(--acs)}
+td{padding:12px 10px;border-top:1px solid var(--bd);font-size:14px;vertical-align:top}
+td small{display:block;color:var(--mut);margin-top:2px}
+.st{cursor:pointer;border:0}
+.ov{position:fixed;inset:0;background:rgba(5,15,40,.6);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
+.ov.on{display:flex}
+.box{background:var(--card);border-radius:16px;padding:24px;width:min(520px,100%);max-height:85vh;overflow:auto}
+.bar{height:10px;background:var(--bd);border-radius:6px;overflow:hidden;margin:16px 0 8px}
+.bar i{display:block;height:100%;width:0;background:var(--ac);transition:width .3s}
+textarea{width:100%;height:260px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);padding:10px;font:13px/1.5 monospace}
+.empty{text-align:center;padding:50px 10px;color:var(--mut)}
+@media(max-width:760px){.app{flex-direction:column}aside{width:100%;flex-direction:row;overflow-x:auto;padding:10px}.logo,aside hr{display:none}aside a{white-space:nowrap}main{padding:0 14px 24px}.hero h1{font-size:26px}.hero svg.owl{display:none}.qa{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside id="nav"></aside>
+<main>
+ <div class="top"><b>Добро пожаловать в ЛексПротекта</b><span class="ws">Рабочее пространство: Основное</span></div>
+ <div id="view"></div>
+</main>
+</div>
+
+<div class="ov" id="prog"><div class="box"><h3 style="margin:0 0 6px">Идет анализ</h3><div id="pt" style="color:var(--mut)">Подготовка</div><div class="bar"><i id="pb"></i></div></div></div>
+<div class="ov" id="chk"><div class="box"><h3 style="margin:0 0 10px">Чек-лист правок</h3><textarea id="ct" readonly></textarea><p style="margin:10px 0 0;text-align:right"><button class="btn sec" onclick="document.getElementById('ct').select()">Выделить текст</button> <button class="btn" onclick="closeChk()">Закрыть</button></p></div></div>
+
+<script>
+var OWL='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><ellipse cx="50" cy="62" rx="30" ry="32" fill="#3b9bf0"/><circle cx="36" cy="42" r="15" fill="#fff"/><circle cx="64" cy="42" r="15" fill="#fff"/><circle cx="36" cy="43" r="7" fill="#0a2147"/><circle cx="64" cy="43" r="7" fill="#0a2147"/><path d="M45 50l5 9 5-9z" fill="#f5b23a"/><path d="M22 24l10 10M78 24L68 34" stroke="#3b9bf0" stroke-width="8" stroke-linecap="round"/><path d="M44 66l6 4 6-4-3 18h-6z" fill="#0a2147"/><circle cx="50" cy="62" r="0" /></svg>';
+var NAV=[['home','Главная','⌂'],['projects','Проекты','▤'],['upload','Новая проверка','＋'],['upload','Загрузка файлов','⇪'],['results','Поиск рисков','⌕'],['results','Результаты','▥'],['history','История','◷'],['settings','Настройки','⚙']];
+var POOL=[
+['fz152','152-ФЗ','Не определены сроки хранения ПДн','В документации отсутствуют сроки хранения персональных данных пользователей.','Политика обработки ПДн','152-ФЗ, ст. 5, ч. 5','h','Указать конкретные сроки хранения ПДн и порядок их удаления.'],
+['fz152','152-ФЗ','Не описан отзыв согласия','Отсутствует механизм и порядок отзыва согласия на обработку ПДн.','Согласие на обработку ПДн','152-ФЗ, ст. 9, ч. 2','h','Добавить в текст согласия порядок отзыва и сроки его исполнения.'],
+['oss','Open Source','Не проверены лицензии зависимостей','В проекте используются внешние библиотеки с неуточненными лицензиями.','SBOM (зависимости)','Open Source, комплаенс','m','Проверить лицензии всех зависимостей и устранить несовместимые.'],
+['ad','Реклама','Отсутствует маркировка рекламы','В приложении используется рекламный контент без идентификатора и маркировки.','Маркетинговые материалы','Закон о рекламе, ст. 18.1','m','Добавить маркировку рекламы (erid) и информацию о рекламодателе.'],
+['kii','КИИ','Не проведена категоризация объектов КИИ','В архитектуре не выделены значимые объекты критической информационной инфраструктуры.','Архитектура системы','187-ФЗ, ст. 7','h','Провести категоризацию и направить сведения во ФСТЭК России.'],
+['oss','Open Source','Лицензия GPL несовместима с закрытым кодом','Одна из библиотек распространяется на условиях copyleft-лицензии.','SBOM (зависимости)','Open Source, GPL-3.0','h','Заменить библиотеку или раскрыть код в соответствии с лицензией.'],
+['pd','152-ФЗ','Трансграничная передача без уведомления','Данные передаются на зарубежные серверы без уведомления Роскомнадзора.','Техническое задание','152-ФЗ, ст. 12','h','Подать уведомление о трансграничной передаче и проверить страну получателя.'],
+['kii','КИИ','Нет плана реагирования на инциденты','Не описан порядок реагирования на компьютерные инциденты.','Архитектура системы','187-ФЗ, ст. 9','m','Разработать план реагирования и порядок взаимодействия с НКЦКИ.'],
+['fz152','152-ФЗ','Не назначено ответственное лицо за ПДн','В документах нет сведений об ответственном за организацию обработки ПДн.','Политика обработки ПДн','152-ФЗ, ст. 22.1','l','Назначить ответственное лицо приказом и указать контакты в политике.'],
+['oss','Open Source','Нет файла NOTICE с атрибуцией','Не указаны авторы и лицензии используемых компонентов.','API-описание','Open Source, Apache-2.0','l','Добавить файл NOTICE и раздел с лицензиями в приложение.'],
+['ad','Реклама','Не указан рекламодатель в блоках','В рекламных блоках отсутствует пометка «Реклама» и данные рекламодателя.','Маркетинговые материалы','Закон о рекламе, ст. 18.1','l','Добавить пометку и сведения о рекламодателе.'],
+['pd','152-ФЗ','Не подтверждена локализация баз данных','Нет подтверждения хранения ПДн граждан РФ на серверах в России.','Архитектура системы','152-ФЗ, ст. 18, ч. 5','h','Разместить базы на территории РФ и зафиксировать это в документации.'],
+['kii','КИИ','Нет перечня отечественного ПО','Отсутствует перечень используемого ПО с указанием страны происхождения.','Зависимости','187-ФЗ, 1236 ПП РФ','m','Составить перечень и подготовить план импортозамещения.']];
+var SEV={h:['Высокая','hiB'],m:['Средняя','miB'],l:['Низкая','loB']};
+var ST=['В работе','Не устранен','Устранен'],STC=['pr','hiB','ok'];
+var files=[],cats={fz152:1,kii:1,oss:1,ad:0,pd:1};
+var res=null,filt='all',q='';
+var recent=[['Демо-проект','pr','Проверка в процессе','Сегодня, 12:08'],['Веб-платформа','dr','Черновик','Вчера, 18:40']];
+var latest={name:'Мобильное приложение',time:'Сегодня, 14:26'};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function sz(b){return b>1048576?(b/1048576).toFixed(1).replace('.',',')+' МБ':Math.max(1,Math.round(b/1024))+' КБ'}
+function rnd(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function cur(){var h=(location.hash||'').slice(1);return h||'home'}
+function go(p){location.hash=p}
+function nav(){var c=cur(),h='<div class="logo">'+OWL+'ЛексПротекта</div>';
+ NAV.forEach(function(n,i){var on=(n[0]==c&&(n[0]!='upload'||n[1]=='Загрузка файлов'||c=='upload'&&i==2&&false))||false;
+  if(n[0]=='upload')on=(c=='upload'&&n[1]=='Загрузка файлов');if(n[0]=='results')on=(c=='results'&&n[1]=='Поиск рисков');
+  if(i==7)h+='<hr>';h+='<a class="'+(on?'on':'')+'" onclick="go(\''+n[0]+'\')"><span>'+n[2]+'</span>'+n[1]+'</a>'});
+ document.getElementById('nav').innerHTML=h}
+function counts(){var r=res||[];return{all:r.length,h:r.filter(function(x){return x.s=='h'}).length,m:r.filter(function(x){return x.s=='m'}).length,l:r.filter(function(x){return x.s=='l'}).length}}
+function home(){var c=counts(),has=!!res;
+ var rec='<div class="row"><span>▤</span><span class="n">'+esc(latest.name)+'</span><span class="badge ok">Проверка завершена</span><small>'+latest.time+'</small></div>';
+ recent.forEach(function(r){rec+='<div class="row"><span>▤</span><span class="n">'+esc(r[0])+'</span><span class="badge '+r[1]+'">'+r[2]+'</span><small>'+r[3]+'</small></div>'});
+ return '<div class="hero"><div class="l"><div><h1>Правовой анализ<br>IT-проектов</h1><p>Автоматизированный анализ правовых рисков в архитектуре и технической документации.</p><button class="btn" onclick="go(\'upload\')">＋ Новая проверка</button></div><div class="owl">'+OWL.replace('<svg','<svg class="owl"')+'</div></div>'
+ +'<div class="card cur"><small style="color:var(--mut)">Текущий проект</small><h3>'+esc(latest.name)+'</h3><span class="badge ok">Проверка завершена</span><div class="stats"><div><b>'+(has?c.all:12)+'</b><span>рисков<br>выявлено</span></div><div><b>'+(has?c.h:5)+'</b><span>высоких<br>рисков</span></div><div><b>'+(has?c.all+Math.round(c.all/2):18)+'</b><span>рекомендаций<br>по правкам</span></div></div></div></div>'
+ +'<div class="card"><h3 style="margin:0">Как работает ЛексПротекта</h3><div class="steps"><div class="step"><b>1. Загрузите документы</b><span>Архитектуру, ТЗ, API-описания и другую техдокументацию</span></div><div class="step"><b>2. ИИ выявит риски</b><span>Проанализирует документы и найдет правовые и комплаенс-риски</span></div><div class="step"><b>3. Получите чек-лист правок</b><span>Конкретные рекомендации для устранения рисков</span></div></div></div>'
+ +'<div class="two"><div class="card"><h3 style="margin:0 0 6px">Недавние проекты</h3>'+rec+'</div><div class="card"><h3 style="margin:0 0 10px">Быстрые действия</h3><div class="qa"><div onclick="go(\'upload\')"><b>＋ Новая проверка</b><small>Запустить анализ проекта</small></div><div onclick="go(\'upload\')"><b>⇪ Загрузка файлов</b><small>Добавить документы</small></div><div onclick="go(\'results\')"><b>⌕ Поиск рисков</b><small>Найти риски в проектах</small></div><div onclick="go(\'results\')"><b>▥ Результаты</b><small>Посмотреть отчеты</small></div></div></div></div>'}
+function upload(){var l='';
+ files.forEach(function(f,i){var e=(f.name.split('.').pop()||'').toLowerCase();l+='<div class="row"><span class="ext '+esc(e)+'">'+esc(e.slice(0,4).toUpperCase())+'</span><span class="n"><b>'+esc(f.name)+'</b></span><small>'+sz(f.size)+'</small><span class="badge ok">✓ Загружен</span><button class="x" onclick="rm('+i+')" title="Удалить">×</button></div>'});
+ if(!files.length)l='<div class="empty">Файлы пока не загружены</div>';
+ var cl=[['fz152','152-ФЗ'],['kii','КИИ'],['oss','Open Source'],['ad','Реклама'],['pd','Персональные данные']].map(function(c){return '<label><input type="checkbox" '+(cats[c[0]]?'checked':'')+' onchange="cats[\''+c[0]+'\']=this.checked?1:0;fix()"> '+c[1]+'</label>'}).join('');
+ return '<h2>Загрузка материалов проекта</h2><p class="sub">Загрузите архитектуру, техническое задание, API-описание и сопутствующие файлы для правовой проверки и выявления рисков.</p>'
+ +'<div class="gridU"><div><div class="drop" id="dz"><div style="font-size:42px;color:var(--ac)">☁</div><h3>Перетащите файлы сюда</h3><p>или выберите на компьютере</p><button class="btn" onclick="document.getElementById(\'fi\').click()">Выбрать файлы</button><input id="fi" type="file" multiple hidden onchange="add(this.files)"><small>Поддерживаются: PDF, DOCX, DOC, XLSX, XLS, PPTX, PNG, JPG, ZIP и другие</small></div>'
+ +'<div class="card" style="margin-top:16px"><div style="display:flex;justify-content:space-between"><h3 style="margin:0">Загруженные файлы ('+files.length+')</h3><a style="color:var(--ac);cursor:pointer" onclick="files=[];render()">Очистить все</a></div>'+l+'</div></div>'
+ +'<div class="card" style="align-self:start"><h3 style="margin:0 0 10px">Как это работает</h3><div class="step" style="margin-bottom:8px"><b>1. Загрузите файлы</b><span>Добавьте материалы проекта.</span></div><div class="step" style="margin-bottom:8px"><b>2. Запустите анализ</b><span>Мы проверим документы на соответствие требованиям законодательства.</span></div><div class="step"><b>3. Получите отчет</b><span>Чек-лист рисков, рекомендации и ссылки на нормы права.</span></div></div></div>'
+ +'<div class="two"><div class="card"><b>Категории рисков для анализа</b><div class="cats">'+cl+'</div></div><div class="card"><button class="btn" id="go" style="width:100%" onclick="analyze()">▷ Начать анализ</button><p style="font-size:13px;color:var(--mut);margin:10px 0 0;text-align:center">Анализ займет 2-5 минут в зависимости от объема и количества файлов.</p></div></div>'}
+function results(){
+ if(!res)return '<div class="card empty"><div style="font-size:44px">🦉</div><h3>Анализ еще не запускался</h3><p>Загрузите файлы проекта и нажмите «Начать анализ», чтобы увидеть найденные риски.</p><button class="btn" onclick="go(\'upload\')">Загрузить файлы</button></div>';
+ var c=counts(),L=res.filter(function(x){
+  if(filt=='h'||filt=='m'||filt=='l'){if(x.s!=filt)return false}else if(filt!='all'&&x.tag!=filt)return false;
+  return !q||(x.t+x.d+x.src+x.n+x.r).toLowerCase().indexOf(q)>-1});
+ function ch(k,t,n){return '<button class="chip '+(filt==k?'on':'')+'" onclick="filt=\''+k+'\';render()">'+t+(n!=null?' '+n:'')+'</button>'}
+ var tags=['152-ФЗ','КИИ','Open Source','Реклама'].filter(function(t){return res.some(function(x){return x.tag==t})});
+ var rows=L.map(function(x){var i=res.indexOf(x);return '<tr><td><b>'+x.t+'</b><small>'+x.d+'</small></td><td>'+x.src+'<small>'+x.n+'</small></td><td><span class="badge '+SEV[x.s][1]+'">'+SEV[x.s][0]+'</span></td><td>'+x.r+'</td><td><button class="badge st '+STC[x.st]+'" onclick="cyc('+i+')" title="Нажмите, чтобы сменить статус">'+ST[x.st]+'</button></td></tr>'}).join('')||'<tr><td colspan="5" class="empty">Ничего не найдено</td></tr>';
+ return '<div style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center"><div><h2>Результаты правового анализа</h2><p class="sub">Найденные правовые риски, их критичность, источники и рекомендации по устранению.</p></div><div class="card" style="padding:12px 16px"><small style="color:var(--mut)">Проверенный проект</small><br><b>'+esc(latest.name)+'</b> <span class="badge ok">Анализ завершен</span><br><small style="color:var(--mut)">'+latest.time+' · '+latest.docs+' док. · '+latest.pages+' стр.</small></div></div>'
+ +'<div class="tbar"><input class="s" placeholder="Найти риск, норму, документ или требование" value="'+esc(q)+'" oninput="q=this.value.toLowerCase();keep()"><button class="btn sec" onclick="chkl()">⇩ Скачать чек-лист</button><button class="btn sec" onclick="chkl()">Экспорт отчета</button></div>'
+ +'<div class="chips">'+ch('all','Все',c.all)+ch('h','Высокие',c.h)+ch('m','Средние',c.m)+ch('l','Низкие',c.l)+tags.map(function(t){return ch(t,t)}).join('')+'</div>'
+ +'<div class="sum"><div class="card"><b>'+c.all+'</b><span>Всего рисков</span></div><div class="card"><b style="color:var(--hit)">'+c.h+'</b><span>Высокие: требуют приоритетного устранения</span></div><div class="card"><b style="color:var(--midt)">'+c.m+'</b><span>Средние: рекомендуется устранить</span></div><div class="card"><b style="color:var(--lot)">'+c.l+'</b><span>Низкие: не критичны</span></div></div>'
+ +'<div class="card tw" id="tb"><table><tr><th>Риск</th><th>Источник</th><th>Критичность</th><th>Рекомендация</th><th>Статус</th></tr>'+rows+'</table></div>'}
+function simple(t){return '<div class="card empty"><h3>'+t+'</h3><p>Этот раздел появится в следующей версии.</p></div>'}
+function history(){var r='<div class="row"><span>▤</span><span class="n">'+esc(latest.name)+'</span><span class="badge ok">Проверка завершена</span><small>'+latest.time+'</small></div>';return '<h2>История проверок</h2><p class="sub">Все запуски анализа в рабочем пространстве.</p><div class="card">'+r+'</div>'}
+function render(){nav();var c=cur(),v=document.getElementById('view');
+ v.innerHTML=c=='upload'?upload():c=='results'?results():c=='home'?home():c=='history'?history():simple(c=='projects'?'Проекты':'Настройки');
+ if(c=='upload')bind();window.scrollTo(0,0)}
+function keep(){var t=document.getElementById('view'),s=document.querySelector('input.s'),p=s.selectionStart;render();s=document.querySelector('input.s');s.focus();s.setSelectionRange(p,p)}
+function fix(){}
+function add(fl){for(var i=0;i<fl.length;i++)files.push({name:fl[i].name,size:fl[i].size});render()}
+function rm(i){files.splice(i,1);render()}
+function bind(){var d=document.getElementById('dz');if(!d)return;
+ ['dragenter','dragover'].forEach(function(e){d.addEventListener(e,function(ev){ev.preventDefault();d.classList.add('over')})});
+ ['dragleave','drop'].forEach(function(e){d.addEventListener(e,function(ev){ev.preventDefault();d.classList.remove('over')})});
+ d.addEventListener('drop',function(ev){add(ev.dataTransfer.files)})}
+function analyze(){
+ if(!files.length){alert('Сначала загрузите хотя бы один файл.');return}
+ var on=Object.keys(cats).filter(function(k){return cats[k]});
+ if(!on.length){alert('Выберите хотя бы одну категорию рисков.');return}
+ var seed=0,s=files.map(function(f){return f.name+f.size}).join('|');for(var i=0;i<s.length;i++)seed=(seed*31+s.charCodeAt(i))|0;
+ var R=rnd(seed),pool=POOL.filter(function(p){return on.indexOf(p[0])>-1});
+ pool=pool.map(function(p){return[R(),p]}).sort(function(a,b){return a[0]-b[0]}).map(function(a){return a[1]});
+ var n=Math.min(pool.length,Math.max(3,Math.round(pool.length*(0.6+R()*0.4))));
+ var out=pool.slice(0,n).map(function(p){return{tag:p[1],t:p[2],d:p[3],src:p[4],n:p[5],s:p[6],r:p[7],st:Math.floor(R()*3)}});
+ var ord={h:0,m:1,l:2};out.sort(function(a,b){return ord[a.s]-ord[b.s]});
+ var steps=['Чтение документов','Распознавание структуры','Сопоставление с нормами права','Оценка критичности рисков','Формирование рекомендаций'],k=0,o=document.getElementById('prog'),b=document.getElementById('pb'),t=document.getElementById('pt');
+ o.classList.add('on');b.style.width='0';
+ var iv=setInterval(function(){k++;b.style.width=(k*20)+'%';t.textContent=steps[Math.min(k,4)];
+  if(k>=5){clearInterval(iv);setTimeout(function(){o.classList.remove('on');
+   res=out;filt='all';q='';var d=new Date(),p=function(x){return(x<10?'0':'')+x};
+   latest={name:'Проект '+(files[0].name.replace(/\.[^.]+$/,'')||'без названия'),time:'Сегодня, '+p(d.getHours())+':'+p(d.getMinutes()),docs:files.length,pages:files.length*Math.round(8+R()*40)};
+   go('results')},350)}},650)}
+function cyc(i){res[i].st=(res[i].st+1)%3;render()}
+function chkl(){var t='ЧЕК-ЛИСТ ПРАВОК\nПроект: '+latest.name+'\n\n';
+ res.forEach(function(x,i){t+=(i+1)+'. ['+(x.st==2?'x':' ')+'] '+x.t.replace(/&[a-z]+;/g,'')+' ('+SEV[x.s][0]+')\n   Норма: '+x.n+'\n   Что сделать: '+x.r+'\n\n'});
+ document.getElementById('ct').value=t;document.getElementById('chk').classList.add('on')}
+function closeChk(){document.getElementById('chk').classList.remove('on')}
+addEventListener('hashchange',render);render();
+</script>
+</body>
+</html>
